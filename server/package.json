@@ -5,8 +5,10 @@
   "author": "Nitin Singh Negi",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^5.10.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "prisma": "^5.10.2",
     "ts-node": "^10.9.2"
   },
