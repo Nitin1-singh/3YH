@@ -6,23 +6,37 @@ import { useForm } from "react-hook-form";
 import { userRegisterT, userRegisterZ } from "@/lib/zodType/userSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "@nextui-org/link";
-import { handleRegister } from "@/lib/user/handleRegister";
+import { handleRegisterLib } from "@/lib/user/handleRegister";
+import { useState } from "react";
 
-const handleError = (e:any)=>{
-  console.log("Error = ",e)
-}
+
 export default function RegisterComponent() {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<userRegisterT>({ resolver: zodResolver(userRegisterZ) })
+  const [loading, setLoading] = useState<boolean  | undefined>(false)
+  const [error, setError] = useState<string | null>(null)
+  const { register, handleSubmit, formState: { errors } } = useForm<userRegisterT>({ resolver: zodResolver(userRegisterZ) })
+
+  const handleRegister = async (data: userRegisterT) => {
+    setLoading(true)
+    const error = await handleRegisterLib(data)
+    setTimeout(()=>{
+      setLoading(false)
+      if (error) setError(error)
+      else setError(null)
+    },3000)
+  }
+
+  // register component
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit(handleRegister,handleError)} >
+    <form className="flex flex-col gap-2" onSubmit={handleSubmit(handleRegister)} >
+      {error ? <p className="text-sm text-red-500">{error}</p> : null}
       <div>
-        <Input color={errors.username ? "danger" : "default"} radius="sm" {...register("username")} errorMessage={errors.username?.message} type="text" label="Username" variant="bordered" placeholder="Enter your username" />
+        <Input isDisabled={loading} color={errors.username ? "danger" : "default"} radius="sm" {...register("username")} errorMessage={errors.username?.message} type="text" label="Username" variant="bordered" placeholder="Enter your username" />
       </div>
       <div>
-        <PasswordInput register={register("password")} error={errors.password?.message} />
+        <PasswordInput loading={loading}  register={register("password")} error={errors.password?.message} />
       </div>
       <div className="grid grid-cols-1">
-        <Button radius="sm" type="submit">Register</Button>
+        <Button isLoading={loading} radius="sm" variant="solid" color="success" type="submit">Register</Button>
       </div>
       <div className="text-sm">
         <span>Already have a account?</span><Link href="/login" className="px-1 text-sm">Sign in</Link>

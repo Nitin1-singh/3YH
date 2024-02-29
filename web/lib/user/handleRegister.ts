@@ -1,13 +1,26 @@
+"use server"
+import { cookies } from "next/headers"
 import { userRegisterT } from "../zodType/userSchema"
 
-export const handleRegister = async(data:userRegisterT) =>{
-  console.log("Register data = ",data)
-  const res = await fetch("http://localhost:4000/user",{
-    method:"POST",
-    body: JSON.stringify(data),
-    headers:{
-      "Content-Type":"application/json"
+export const handleRegisterLib = async(data:userRegisterT) =>{ 
+  try {
+    const res = await fetch("http://localhost:4000/user/register",{
+      method:"POST",
+      body: JSON.stringify(data),
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+    const item = await res.json()
+    if(item.error) return "Username already in use"
+    else {
+      cookies().set({
+        name: "jwt",
+        value: item.data,
+      })
     }
-  })
-  console.log("Reg Res = ",await res.json())
+}
+  catch (e){
+    return "Internal Server Error"
+  }
 }
