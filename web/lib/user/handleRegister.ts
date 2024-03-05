@@ -12,15 +12,16 @@ export const handleRegisterLib = async(data:userRegisterT) =>{
       }
     })
     const item = await res.json()
-    if(item.error) return "Username already in use"
+    if(item.error) return {error:"Username already in use"}
     else {
       cookies().set({
         name: "jwt",
         value: item.data,
       })
+      return {data:cookies().get("jwt")?.value}
     }
 }
   catch (e){
-    return "Internal Server Error"
+    return {error:"Internal Server Error"}
   }
 }

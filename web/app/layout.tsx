@@ -4,7 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import CustomNavbar from "@/components/navbar/CustomNavbar";
 
-const inter = Poppins({ subsets: ["latin-ext"],weight:["100","200","300","500","700","900"] });
+const inter = Poppins({ subsets: ["latin-ext"], weight: ["300", "500", "700", "900"] });
 
 export const metadata: Metadata = {
   title: "3YH",

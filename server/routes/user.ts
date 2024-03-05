@@ -1,17 +1,14 @@
 import { Router } from "express";
 import { createUser, loginUser } from "../lib/db";
-import { createToken } from "../lib/token";
+import { createToken, verifyToken } from "../lib/token";
 
 export const userRouter = Router()
 
-userRouter.get("/",(req,res)=>{
-  res.json("get user")
-})
 userRouter.post("/register",async (req,res)=>{
   try {
     const data = req.body
-    const id = (await createUser(data))?.result
-    const token = createToken({id:id})
+    const id = (await createUser(data))
+    const token = createToken({id:id.result,username:id.username,photo:id.photo})
     res.json({data:token})
   }catch(e) {
     console.log("e = ",e)
@@ -22,9 +19,9 @@ userRouter.post("/register",async (req,res)=>{
 userRouter.post("/login",async(req,res)=>{
   try {
     const data = req.body
-    const valid = (await loginUser(data))?.result
+    const valid = await loginUser(data)
     if(valid) {
-      const token = createToken({id:valid})
+      const token = createToken({id:valid.result,username:valid.username,photo:valid.photo})
       res.json({data:token})
     }
     else {
@@ -32,5 +29,26 @@ userRouter.post("/login",async(req,res)=>{
     }
   }catch (e) {
     res.json({error:"Invalid username or password"})
+  }
+})
+
+userRouter.post("/verify",async(req,res)=>{
+  const { token } =  req.body 
+  try {
+    const data = verifyToken(token)
+    return res.status(200).json({sucess:true})
+  }catch (e) {
+    return  res.status(400).json({sucess:false,error:e})
+  }
+})
+
+
+userRouter.post("/getUser",(req,res)=>{
+  const { token } =  req.body 
+  try {
+    const data = verifyToken(token)
+    return res.status(200).json({sucess:true,data:data})
+  }catch (e) {
+    return  res.status(400).json({sucess:false,error:e})
   }
 })

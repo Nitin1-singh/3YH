@@ -1,35 +1,22 @@
 "use server"
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
+import { CompetitionBox } from "./NavbarItems";
+import { NavbarRight } from "./NavbarRight";
 
 export default async function CustomNavbar() {
-
   return (
-    <Navbar isBordered className="mb-3" maxWidth="xl">
+    <Navbar isBordered maxWidth="xl">
       <NavbarContent justify="start">
-        <NavbarBrand>
-          <p className="text-3xl font-bold text-inherit">3YH</p>
-        </NavbarBrand>
+        <p className="text-3xl w-1/4 font-bold text-inherit">3YH</p>
         <NavbarItem>
-          <Link href="/competition">Competition</Link>
+          <Link href="/home" >Home</Link>
         </NavbarItem>
+        <CompetitionBox />
       </NavbarContent>
-      <NavbarContent justify="start">
-      </NavbarContent>
-      <NavbarContent justify="start">
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Button radius="sm" as={Link} color="secondary" variant="bordered" href="/login">Login</Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Button radius="sm" as={Link} color="primary" href="/register" variant="solid">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+      <NavbarRight />
     </Navbar>
   );
 }

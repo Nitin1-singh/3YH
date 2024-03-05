@@ -8,21 +8,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "@nextui-org/link";
 import { handleRegisterLib } from "@/lib/user/handleRegister";
 import { useState } from "react";
+import { useAtom } from "jotai";
+import { userAtom } from "@/sharedStates/user";
 
 
 export default function RegisterComponent() {
-  const [loading, setLoading] = useState<boolean  | undefined>(false)
-  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean | undefined>(false)
+  const [error, setError] = useState<string | null | undefined>(null)
+  const [user, setUser] = useAtom(userAtom)
   const { register, handleSubmit, formState: { errors } } = useForm<userRegisterT>({ resolver: zodResolver(userRegisterZ) })
 
   const handleRegister = async (data: userRegisterT) => {
     setLoading(true)
-    const error = await handleRegisterLib(data)
-    setTimeout(()=>{
+    const res = await handleRegisterLib(data)
+    setTimeout(() => {
       setLoading(false)
-      if (error) setError(error)
-      else setError(null)
-    },3000)
+      if (error) setError(res.error)
+      else {
+        setError(null)
+        setUser(res.data)
+      }
+    }, 3000)
   }
 
   // register component
@@ -33,7 +39,7 @@ export default function RegisterComponent() {
         <Input isDisabled={loading} color={errors.username ? "danger" : "default"} radius="sm" {...register("username")} errorMessage={errors.username?.message} type="text" label="Username" variant="bordered" placeholder="Enter your username" />
       </div>
       <div>
-        <PasswordInput loading={loading}  register={register("password")} error={errors.password?.message} />
+        <PasswordInput loading={loading} register={register("password")} error={errors.password?.message} />
       </div>
       <div className="grid grid-cols-1">
         <Button isLoading={loading} radius="sm" variant="solid" color="success" type="submit">Register</Button>

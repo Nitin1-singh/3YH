@@ -20,14 +20,16 @@ model user {
   password                String
   is_admin                Boolean  @default(false)
   competiton_participated String[]
+  profile_img String @default("https://kpppzygfiwnuqhdvgnsi.supabase.co/storage/v1/object/public/profile_img/user.png")
 }
 
 model competition {
-  id          String   @id @default(uuid())
-  overview    String
+  id          String   @id @default(uuid()) 
   description String
-  start_date  DateTime
-  end_date    DateTime
-  test_data   Bytes
-  train_data  Bytes
+  photo String
+  start_date  DateTime @default(now())
+  end_date    String
+  test_data   String
+  train_data  String
+  result  String[]
 }

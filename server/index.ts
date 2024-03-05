@@ -1,11 +1,17 @@
+import dotenv from "dotenv"
+dotenv.config()
+
 import express from "express"
 import cors from "cors"
 
 import { userRouter } from "./routes/user"
+import { adminRouter } from "./routes/admin"
+import { compRouter } from "./routes/comp"
 const app = express()
 
 app.use(express.json())
 app.use(cors())
+app.use(express.urlencoded({extended:false}))
 
 
 app.get("/",(req,res)=>{
@@ -14,6 +20,9 @@ app.get("/",(req,res)=>{
 
 
 app.use("/user",userRouter)
+app.use("/admin",adminRouter)
+app.use("/comp",compRouter)
+
 
 app.listen(4000,()=>{
   console.log("Listing at port 4000")

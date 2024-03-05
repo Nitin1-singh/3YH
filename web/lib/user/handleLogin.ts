@@ -13,8 +13,12 @@ export const handleLoginLib = async(data:userRegisterT)=>{
       }
     )
     const ans = await res.json()
-    if(ans.error) return "Invalid username or password"
-    else cookies().set({name:"jwt",value:ans.data})
+    if(ans.error) return {sucess:false,msg:"Invalid username or password"}
+    else {
+      cookies().set("jwt",ans.data)
+      return {sucess:true}
+    }
+
   }
   catch(e) {
     console.log("client error",e)
