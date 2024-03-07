@@ -12,7 +12,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
         <NextUIProvider>
           {children}
         </NextUIProvider>
