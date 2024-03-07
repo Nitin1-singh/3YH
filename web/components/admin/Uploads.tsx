@@ -7,9 +7,9 @@ import { FormEvent, useState } from "react";
 export function UploadFile() {
   const [img, setImg] = useState<File>()
   const [train, setTrain] = useState<File>()
-  const [title, setTitle] = useState<string | Blob>()
-  const [overview, setOverview] = useState<String>()
-  const [end, setEnd] = useState<String>()
+  const [title, setTitle] = useState<string>()
+  const [overview, setOverview] = useState<string>()
+  const [end, setEnd] = useState<string>()
 
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
