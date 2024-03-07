@@ -15,7 +15,7 @@ export function SingleResult({ index, name, photo, score }: { name: string, inde
   )
 }
 
-export function Result(user) {
+export function Result(user:any) {
   return (
     <Card>
       <CardBody className="flex flex-col justify-between">
@@ -25,7 +25,7 @@ export function Result(user) {
           <p className="w-[100px]">Score</p>
           <p className="w-[100px]">Members</p>
         </div>
-        {user.user.map((d, i) => (
+        {user.user.map((d:any, i:any) => (
           <SingleResult key={i} name={d.name} photo={d.photo_url} score={d.score} index={i} />
         ))}
       </CardBody>
