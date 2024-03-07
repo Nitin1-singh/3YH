@@ -1,7 +1,6 @@
 "use server"
 import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
+import { Navbar, NavbarContent, NavbarItem } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
 import { CompetitionBox } from "./NavbarItems";
 import { NavbarRight } from "./NavbarRight";

@@ -4,7 +4,7 @@ import { userRegisterT } from "../zodType/userSchema"
 
 export const handleLoginLib = async(data:userRegisterT)=>{
   try {
-    const res = await fetch("http://localhost:4000/user/login",{
+    const res = await fetch(process.env.NEXT_PUBLIC_NODE_API+"/user/login",{
         method:"POST",
         body: JSON.stringify(data),
         headers:{

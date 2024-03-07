@@ -5,7 +5,7 @@ const  fetchDataFromJwt = async() => {
   try {
     const auth = cookies().get("jwt")?.value
     if(auth) {
-      const res = await fetch("http://localhost:4000/user/getUser",{
+      const res = await fetch(process.env.NEXT_PUBLIC_NODE_API+"/user/getUser",{
         method: "POST",
         body:JSON.stringify({token:auth}),
         headers:{
@@ -13,12 +13,11 @@ const  fetchDataFromJwt = async() => {
         }
       })
       const data = await res.json()
-      if (data.sucess)   return {sucess:true,data:data.data}
-      else throw new Error("Internal Servor Error")
+      if (data.sucess)   return {data:data}
     }
   }
   catch (e) {
-    return {sucess:false,error:"Internal Servor Errror",errorMsg:e}
+    return {error:"Internal Servor Errror",errorMsg:e}
   }
 }
 

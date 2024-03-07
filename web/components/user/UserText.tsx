@@ -1,15 +1,9 @@
 "use client"
-
-import { fetchDataFromJwt } from "@/lib/user/fetchDataFromJwt"
-import { useEffect, useState } from "react"
+import { userState } from "@/sharedStates/user"
+import { useRecoilState } from "recoil"
 
 export function UserText() {
-  const [user, setUser] = useState(" ")
-  useEffect(() => {
-    fetchDataFromJwt().then((data) =>
-      setUser(data?.data)
-    )
-  }, [])
+  const [user, setUser] = useRecoilState(userState)
   return (
     <div className="h-[150px] flex flex-col justify-center">
       <p className="text-3xl font-bold">Welcome,{user?.username}</p>

@@ -1,11 +1,10 @@
-import { atom } from "jotai";
+import { atom } from "recoil";
 
-type userAtomT = {
-  id:string  | undefined
-  username:string | undefined
-  photo:string | undefined
-}
-
-const userAtom = atom<userAtomT | null | undefined>(undefined)
-
-export {userAtom}
+export const userState = atom({
+  key:"userState",
+  default:null
+})
+export const selectComp = atom({
+  key:"selectComp",
+  default:null
+})

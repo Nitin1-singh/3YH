@@ -17,7 +17,6 @@ export type Tdata = {
   description:string
   photo:string 
   end_date:string
-  test_data:String
   train_data:String
 }
 
@@ -30,4 +29,37 @@ async function getAllCompetition() {
   return res
 }
 
-export {createUser, loginUser, createCompetiton, getAllCompetition}
+async function getCompetitionById(compId:string) {
+  const res = await prisma.competition.findUnique({where:{id:compId}})
+  return res
+}
+
+async function setResultById(compId:string,user,score) {
+  const res = await prisma.comp.create({
+    data:{
+      id:user.id,
+      score:score,
+      competitionId:compId
+    }
+  })
+}
+
+async function getResultById(compId:string) {
+  const res = await prisma.comp.findMany({
+    where:{
+      competitionId:compId
+    }
+  })
+  return res    
+}
+
+async function getUserById(id:string) {
+  const res = await prisma.user.findFirst({
+    where:{
+      id:id
+    }
+  })
+  return res    
+}
+
+export {createUser, loginUser, createCompetiton, getAllCompetition, getCompetitionById, setResultById, getResultById, getUserById}

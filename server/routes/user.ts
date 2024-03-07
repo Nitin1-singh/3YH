@@ -4,19 +4,21 @@ import { createToken, verifyToken } from "../lib/token";
 
 export const userRouter = Router()
 
-userRouter.post("/register",async (req,res)=>{
-  try {
-    const data = req.body
-    const id = (await createUser(data))
-    const token = createToken({id:id.result,username:id.username,photo:id.photo})
-    res.json({data:token})
-  }catch(e) {
-    console.log("e = ",e)
-    res.json({error:e})
-  }
+userRouter.post("/register",(req,res)=>{
+  setTimeout(async()=>{
+    try {
+      const data = req.body
+      const id = (await createUser(data))
+      const token = createToken({id:id.result,username:id.username,photo:id.photo})
+      res.json({data:token})
+    }catch(e) {
+      res.json({error:e})
+    }
+  },3000)
 })
 
-userRouter.post("/login",async(req,res)=>{
+userRouter.post("/login",(req,res)=>{
+  setTimeout(async()=>{
   try {
     const data = req.body
     const valid = await loginUser(data)
@@ -30,7 +32,7 @@ userRouter.post("/login",async(req,res)=>{
   }catch (e) {
     res.json({error:"Invalid username or password"})
   }
-})
+},3000)})
 
 userRouter.post("/verify",async(req,res)=>{
   const { token } =  req.body 
