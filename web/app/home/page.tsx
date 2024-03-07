@@ -3,7 +3,7 @@
 import { UserBadge } from "@/components/user/UserBadge"
 import { UserText } from "@/components/user/UserText"
 
-export default async function () {
+export default async function Home() {
   return (
     <main className="w-11/12 h-3/4 mx-auto ps-2">
       <section className="flex flex-col justify-center">

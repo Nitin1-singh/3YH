@@ -15,7 +15,7 @@ export default async function LoginRoute() {
           <LoginComponent />
         </div>
         <div className="flex flex-row items-center mt-3 text-sm font-medium ps-3">
-          <span>Don't have a account?</span><span><Link className="ms-1" size="sm" href="/register">Register</Link></span>
+          <span>Dont have a account?</span><span><Link className="ms-1" size="sm" href="/register">Register</Link></span>
         </div>
         <div className="flex justify-end">
           <Image width={100} height={100} src="/login/login-box.png" alt="image" />

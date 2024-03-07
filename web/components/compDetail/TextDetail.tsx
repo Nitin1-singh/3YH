@@ -8,7 +8,7 @@ export function TextDetail({ title, src, start, end }: { title: string, src: str
         <TimeLine start={start} end={end} />
       </div>
       <div className="basis-1/4">
-        <Image height={200} width={200} src={src} />
+        <Image height={200} width={200} alt="basic" src={src} />
       </div>
     </section>
   )

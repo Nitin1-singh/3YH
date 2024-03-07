@@ -5,7 +5,7 @@ export function UserBadge({ text, src }: { text: string, src: string }) {
   return (
     <div>
       <div className="flex flex-row items-center gap-2">
-        <Image width={30} height={30} src={src} />
+        <Image alt="user" width={30} height={30} src={src} />
         <div>
           <p className="font-bold">{text}</p>
         </div>
