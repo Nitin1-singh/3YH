@@ -13,7 +13,7 @@ export function CompetitionCard() {
   if (isLoading) return <p>Loading...</p>
   if (isSuccess) {
     return (
-      data != null ?  data.data.data.map((d) => (
+      data != null ?  data.data.data.map((d:any) => (
         <CompCard key={d.id} id={d.id} src={d.photo} title={d.title} />
       ))
         : null

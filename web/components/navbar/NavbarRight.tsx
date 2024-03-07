@@ -10,7 +10,7 @@ import { userState } from "@/sharedStates/user";
 
 
 export function NavbarRight() {
-  const [user, setUser] = useRecoilState(userState)
+  const [user, setUser] = useRecoilState<any>(userState)
   const { data, isSuccess, isLoading } = useQuery({ queryKey: ["getJwt"], queryFn: async () => { return fetchDataFromJwt() } })
   if (isLoading) return (
     <NavbarContent justify="end">

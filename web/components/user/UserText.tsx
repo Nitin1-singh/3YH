@@ -3,7 +3,7 @@ import { userState } from "@/sharedStates/user"
 import { useRecoilState } from "recoil"
 
 export function UserText() {
-  const [user, setUser] = useRecoilState(userState)
+  const [user, setUser] = useRecoilState<any>(userState)
   return (
     <div className="h-[150px] flex flex-col justify-center">
       <p className="text-3xl font-bold">Welcome,{user?.username}</p>
