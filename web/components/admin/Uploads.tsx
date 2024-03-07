@@ -7,7 +7,7 @@ import { FormEvent, useState } from "react";
 export function UploadFile() {
   const [img, setImg] = useState<File>()
   const [train, setTrain] = useState<File>()
-  const [title, setTitle] = useState<String>()
+  const [title, setTitle] = useState<string | Blob>()
   const [overview, setOverview] = useState<String>()
   const [end, setEnd] = useState<String>()
 
@@ -19,7 +19,7 @@ export function UploadFile() {
       const data = new FormData()
       data.set("image", img!)
       data.set("train", train!)
-      data.set("title", title)
+      data.set("title", title!)
 
       const res = await fetch(process.env.NEXT_PUBLIC_NODE_API+"admin", {
         method: "POST",
