@@ -1,6 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a online hackathon project bootstrapped with [`3YH`](https://3-yh.vercel.app/).
 
-## Getting Started
+## Demo
+A online learning platform for hackthon
+
+https://github.com/Nitin1-singh/3YH/assets/148739561/cc5aaba6-bf8a-4cb5-ba43-386b0b2ad36b
 
 First, run the development server:
 
